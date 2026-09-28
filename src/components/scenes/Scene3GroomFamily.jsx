@@ -51,7 +51,7 @@ export default function Scene3GroomFamily() {
                 Grandson of Late Shri Surender Lal Das
               </p>
               <p className="text-emerald-300/80 text-xs">
-                Kishanpatti, Darbhanga
+                Kumarpatti, Darbhanga
               </p>
             </div>
 

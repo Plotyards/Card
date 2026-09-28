@@ -104,10 +104,10 @@ export default function GroomFamily() {
                 Native / Ancestral Origin
               </span>
               <p className="font-serif text-base sm:text-lg font-bold text-stone-900 mt-0.5">
-                Kishanpatti, Darbhanga
+                Kumarpatti, Darbhanga
               </p>
               <p className="font-hindi text-xs text-stone-600">
-                किशनपट्टी, दरभंगा
+                कुमारपट्टी, दरभंगा
               </p>
             </div>
           </div>

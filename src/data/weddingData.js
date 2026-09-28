@@ -10,7 +10,7 @@ export const weddingData = {
       father: "Dr. Ramesh Kumar Lal",
       parents: "S/o Dr. Ramesh Kumar Lal",
       grandparents: "Grandson of Late Shri Surender Lal Das",
-      nativePlace: "Kishanpatti, Darbhanga",
+      nativePlace: "Kumarpatti, Darbhanga",
       maternalGrandparents: {
         nana: "Shri Ramautar Lal",
         nani: "Smt. Vibha Devi"
