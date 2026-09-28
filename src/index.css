@@ -1,0 +1,136 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --gold-primary: #D4AF37;
+    --gold-deep: #B8860B;
+    --maroon-rich: #600C1F;
+    --ivory-bg: #FDFBF7;
+  }
+
+  body {
+    background-color: #FDFBF7;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+}
+
+/* Royal Indian Wedding Gold Foil Gradient Text */
+.gold-text-gradient {
+  background: linear-gradient(135deg, #B8860B 0%, #D4AF37 35%, #FFF0BD 65%, #C5A059 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.maroon-text-gradient {
+  background: linear-gradient(135deg, #4A0D18 0%, #600C1F 50%, #8B1E3F 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Indian Wedding Traditional Border Frames */
+.royal-border {
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  box-shadow: 
+    0 0 0 4px rgba(253, 251, 247, 0.9),
+    0 0 0 5px rgba(212, 175, 55, 0.25),
+    0 10px 30px -5px rgba(96, 12, 31, 0.08);
+}
+
+.royal-border-groom {
+  border: 1.5px solid rgba(96, 12, 31, 0.35);
+  box-shadow: 
+    0 0 0 4px rgba(253, 251, 247, 0.95),
+    0 0 0 6px rgba(212, 175, 55, 0.4),
+    0 12px 35px -5px rgba(96, 12, 31, 0.12);
+}
+
+.royal-border-bride {
+  border: 1.5px solid rgba(136, 19, 55, 0.35);
+  box-shadow: 
+    0 0 0 4px rgba(253, 251, 247, 0.95),
+    0 0 0 6px rgba(212, 175, 55, 0.4),
+    0 12px 35px -5px rgba(136, 19, 55, 0.12);
+}
+
+/* Traditional Corner Ornaments */
+.corner-ornament {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  border-color: #D4AF37;
+  opacity: 0.8;
+  pointer-events: none;
+}
+.corner-tl { top: 8px; left: 8px; border-top: 2px solid; border-left: 2px solid; }
+.corner-tr { top: 8px; right: 8px; border-top: 2px solid; border-right: 2px solid; }
+.corner-bl { bottom: 8px; left: 8px; border-bottom: 2px solid; border-left: 2px solid; }
+.corner-br { bottom: 8px; right: 8px; border-bottom: 2px solid; border-right: 2px solid; }
+
+/* Gentle Petals Keyframes */
+@keyframes floatPetal {
+  0% {
+    transform: translateY(-20px) rotate(0deg) translateX(0px);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.85;
+  }
+  90% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(105vh) rotate(540deg) translateX(80px);
+    opacity: 0;
+  }
+}
+
+.petal-animation {
+  position: fixed;
+  pointer-events: none;
+  z-index: 40;
+  animation-name: floatPetal;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  animation-iteration-count: infinite;
+}
+
+/* Subtle Slow Spin for Mandalas */
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-spin-very-slow {
+  animation: spinSlow 90s linear infinite;
+}
+
+/* Gentle Pulsing Glow */
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 0.9; transform: scale(1.03); }
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 4s ease-in-out infinite;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* Ultra smooth scrolling and GPU acceleration */
+.scene-card {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
