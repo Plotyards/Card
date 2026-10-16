@@ -134,3 +134,33 @@
   backface-visibility: hidden;
   transform: translateZ(0);
 }
+
+/* 10-Second Auto-Slide Progress Bar */
+@keyframes autoSlideProgress {
+  from { width: 0%; }
+  to { width: 100%; }
+}
+
+.animate-auto-slide-progress {
+  animation: autoSlideProgress 10s linear forwards;
+}
+
+/* Royal Gold Shimmer Sweep */
+@keyframes royalShimmer {
+  0% { transform: translateX(-150%) skewX(-20deg); }
+  50%, 100% { transform: translateX(250%) skewX(-20deg); }
+}
+
+.animate-royal-shimmer {
+  animation: royalShimmer 3.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+/* Subtle Golden Ray Rotation */
+@keyframes celestialRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-celestial-spin {
+  animation: celestialRotate 30s linear infinite;
+}

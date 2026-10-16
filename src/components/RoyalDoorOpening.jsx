@@ -1,6 +1,8 @@
 import React, { useRef, useState } from 'react';
 import gsap from 'gsap';
 import { startMusic } from '../utils/audioManager';
+import { SacredGaneshaIllustration, FloralToran, DiyaIllustration } from './illustrations/TraditionalArtwork';
+import { Sparkles } from 'lucide-react';
 
 export default function RoyalDoorOpening({ onOpened }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,7 +17,7 @@ export default function RoyalDoorOpening({ onOpened }) {
     if (isOpen) return;
     setIsOpen(true);
 
-    // Start celebratory music upon door opening gesture
+    // Start celebratory wedding music upon door opening
     startMusic();
 
     const tl = gsap.timeline({
@@ -24,52 +26,52 @@ export default function RoyalDoorOpening({ onOpened }) {
       },
     });
 
-    // 1. Seal pulses and bursts open
+    // 1. Seal pulses and bursts with radiant golden light
     tl.to(sealRef.current, {
       scale: 1.25,
       opacity: 0,
-      duration: 0.6,
-      ease: 'back.in(1.7)',
+      duration: 0.65,
+      ease: 'back.in(1.8)',
     })
-    // 2. Bright warm golden light glows from behind the doors
+    // 2. Bright warm golden sunlight burst glows from behind doors
     .to(
       lightGlowRef.current,
       {
-        opacity: 0.9,
-        scale: 1.8,
-        duration: 0.8,
+        opacity: 1,
+        scale: 2.2,
+        duration: 0.85,
         ease: 'power2.out',
       },
-      '-=0.4'
+      '-=0.45'
     )
-    // 3. Left and Right doors swing open in grand 3D perspective
+    // 3. Palace Doors swing open in dramatic 3D perspective
     .to(
       leftDoorRef.current,
       {
-        rotateY: -110,
-        opacity: 0.1,
+        rotateY: -115,
+        opacity: 0.05,
         duration: 1.6,
         ease: 'power3.inOut',
       },
-      '-=0.5'
+      '-=0.55'
     )
     .to(
       rightDoorRef.current,
       {
-        rotateY: 110,
-        opacity: 0.1,
+        rotateY: 115,
+        opacity: 0.05,
         duration: 1.6,
         ease: 'power3.inOut',
       },
-      '<=' // Run concurrently with left door
+      '<=' // Synchronous with left door
     )
-    // 4. Arch and container fade out revealing the invitation scene
+    // 4. Header arch gracefully lifts away
     .to(
       archRef.current,
       {
         opacity: 0,
-        y: -30,
-        duration: 0.8,
+        y: -40,
+        duration: 0.7,
         ease: 'power2.in',
       },
       '-=0.8'
@@ -79,7 +81,7 @@ export default function RoyalDoorOpening({ onOpened }) {
       {
         opacity: 0,
         pointerEvents: 'none',
-        duration: 0.6,
+        duration: 0.5,
         ease: 'power1.out',
       },
       '-=0.2'
@@ -89,60 +91,93 @@ export default function RoyalDoorOpening({ onOpened }) {
   return (
     <div
       ref={containerRef}
-      className="absolute inset-0 z-50 flex items-center justify-center overflow-hidden bg-[#1A0308] select-none [perspective:1200px]"
+      className="absolute inset-0 z-50 flex items-center justify-center overflow-hidden bg-[#120104] select-none [perspective:1400px]"
     >
-      {/* Background Golden Light Burst (revealed as doors swing) */}
+      {/* Background Golden Sunlight Burst (revealed as doors open) */}
       <div
         ref={lightGlowRef}
-        className="absolute inset-0 pointer-events-none opacity-0 flex items-center justify-center"
+        className="absolute inset-0 pointer-events-none opacity-0 flex items-center justify-center z-0"
       >
-        <div className="w-[500px] h-[500px] rounded-full bg-gradient-to-r from-amber-400/40 via-yellow-200/50 to-amber-500/40 blur-3xl" />
+        <div className="w-[550px] h-[550px] rounded-full bg-gradient-to-r from-amber-400/50 via-yellow-200/60 to-amber-500/50 blur-[90px]" />
       </div>
 
-      {/* Royal Temple Arch Header on Top */}
+      {/* Top Floating Floral Toran & Royal Header Banner */}
       <div
         ref={archRef}
-        className="absolute top-2 sm:top-6 left-1/2 -translate-x-1/2 z-30 w-full max-w-sm px-4 flex flex-col items-center pointer-events-none drop-shadow-2xl"
+        className="absolute top-0 left-0 right-0 z-30 flex flex-col items-center pointer-events-none"
       >
-        <div className="px-5 py-1.5 rounded-full bg-gradient-to-r from-amber-900/90 via-[#3E0513]/95 to-amber-900/90 border border-amber-400/60 shadow-lg flex items-center gap-2">
-          <span className="text-amber-400 text-xs">🪔</span>
-          <span className="font-hindi text-amber-200 text-xs sm:text-sm font-bold tracking-widest">
+        {/* Marigold and Mango Leaves Toran */}
+        <div className="w-full max-w-md mx-auto pt-1 opacity-90 drop-shadow-md">
+          <FloralToran className="w-full" />
+        </div>
+
+        {/* Temple Arch Plaque with Glowing Diyas */}
+        <div className="px-5 py-1.5 -mt-1 rounded-full bg-gradient-to-r from-[#2A030C]/95 via-[#4A0815]/95 to-[#2A030C]/95 border border-[#D4AF37]/70 shadow-[0_4px_20px_rgba(0,0,0,0.8)] flex items-center gap-2.5 backdrop-blur-md">
+          <DiyaIllustration className="w-5 h-5 drop-shadow" />
+          <span className="font-hindi text-amber-200 text-xs sm:text-sm font-bold tracking-widest drop-shadow-sm">
             ॥ श्री गणेशाय नमः ॥
           </span>
-          <span className="text-amber-400 text-xs">🪔</span>
+          <DiyaIllustration className="w-5 h-5 transform -scale-x-100 drop-shadow" />
         </div>
       </div>
 
       {/* Left Palace Door */}
       <div
         ref={leftDoorRef}
-        className="w-1/2 h-full absolute left-0 top-0 z-10 [transform-origin:left_center] [transform-style:preserve-3d] shadow-[15px_0_35px_rgba(0,0,0,0.8)] border-r border-amber-500/40 bg-gradient-to-br from-[#2D060F] via-[#3E0513] to-[#1C0207] flex flex-col justify-between p-3 sm:p-6"
+        className="w-1/2 h-full absolute left-0 top-0 z-10 [transform-origin:left_center] [transform-style:preserve-3d] shadow-[20px_0_40px_rgba(0,0,0,0.95)] border-r-2 border-[#D4AF37]/60 bg-gradient-to-br from-[#200207] via-[#350611] to-[#160105] flex flex-col justify-between p-2.5 sm:p-4 overflow-hidden"
       >
-        {/* Intricate Carved Wood Paneling & Gold Studs */}
-        <div className="w-full h-full rounded-l-xl border-2 border-[#D4AF37]/50 p-2 sm:p-4 flex flex-col justify-between relative bg-[radial-gradient(#D4AF37_1px,transparent_1px)] [background-size:16px_16px]">
-          {/* Top Panel */}
-          <div className="h-1/3 rounded-lg border border-amber-500/30 bg-[#24030B]/80 p-2 flex items-center justify-center">
-            <svg viewBox="0 0 60 60" className="w-12 h-12 text-amber-400/60" fill="currentColor">
-              <circle cx="30" cy="30" r="24" fill="none" stroke="currentColor" strokeWidth="1" strokeDasharray="3 3" />
-              <circle cx="30" cy="30" r="16" fill="none" stroke="currentColor" strokeWidth="1.5" />
-              <path d="M30 14 L34 26 L46 30 L34 34 L30 46 L26 34 L14 30 L26 26 Z" />
+        {/* Subtle Silk Weave & Golden Star Fleck Pattern */}
+        <div className="absolute inset-0 pointer-events-none opacity-20 bg-[radial-gradient(#D4AF37_1px,transparent_1px)] [background-size:16px_16px]" />
+
+        {/* Outer Carved Palace Door Frame */}
+        <div className="relative w-full h-full rounded-l-2xl border-2 border-[#D4AF37]/50 p-2 sm:p-3 flex flex-col justify-between shadow-inner bg-black/20">
+          
+          {/* Top Panel: Sacred Golden Mandala & Filigree */}
+          <div className="h-[28%] rounded-xl border border-amber-500/35 bg-[#25030B]/90 p-2 flex flex-col items-center justify-center relative overflow-hidden shadow-inner">
+            <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#D4AF37_1px,transparent_1px)] [background-size:10px_10px]" />
+            <svg viewBox="0 0 80 80" className="w-14 h-14 text-amber-400/70 animate-spin-very-slow" fill="none">
+              <circle cx="40" cy="40" r="32" stroke="currentColor" strokeWidth="1" strokeDasharray="3 3" />
+              <circle cx="40" cy="40" r="22" stroke="currentColor" strokeWidth="1.5" />
+              <circle cx="40" cy="40" r="10" fill="#D4AF37" fillOpacity="0.3" stroke="currentColor" strokeWidth="1" />
+              <path d="M40 8 L44 32 L68 40 L44 48 L40 72 L36 48 L12 40 L36 32 Z" fill="currentColor" fillOpacity="0.4" />
+              <circle cx="40" cy="40" r="4" fill="#FFF3B0" />
             </svg>
-          </div>
-
-          {/* Left Brass Door Ring Handle */}
-          <div className="absolute right-3 top-1/2 -translate-y-1/2 flex flex-col items-center">
-            <div className="w-9 h-9 rounded-full bg-gradient-to-tr from-amber-700 via-amber-400 to-yellow-200 border-2 border-amber-900 shadow-xl flex items-center justify-center">
-              <div className="w-4 h-4 rounded-full bg-[#3E0513] border border-amber-400" />
-            </div>
-            {/* Hanging Ring */}
-            <div className="w-6 h-9 -mt-2 rounded-b-full border-4 border-amber-400 shadow-md" />
-          </div>
-
-          {/* Bottom Panel */}
-          <div className="h-1/3 rounded-lg border border-amber-500/30 bg-[#24030B]/80 p-2 flex items-center justify-center">
-            <span className="font-hindi text-lg sm:text-xl text-amber-400/70 font-bold">
-              शुभ
+            <span className="text-[9px] font-serif uppercase tracking-[0.25em] text-amber-300/80 mt-1">
+              मांगलिक
             </span>
+          </div>
+
+          {/* Left Door Handle: Heavy Royal Brass Ring Knocker */}
+          <div className="absolute right-2 sm:right-3 top-1/2 -translate-y-1/2 flex flex-col items-center z-20">
+            {/* Ornate Brass Backplate */}
+            <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-gradient-to-tr from-amber-800 via-amber-400 to-yellow-100 border-2 border-amber-950 shadow-[0_0_15px_rgba(212,175,55,0.7)] flex items-center justify-center">
+              <div className="w-5 h-5 rounded-full bg-[#32040E] border-2 border-amber-300 flex items-center justify-center">
+                <span className="w-2 h-2 rounded-full bg-amber-400 shadow-[0_0_6px_#FFD700]" />
+              </div>
+            </div>
+            {/* Hanging Heavy Ring */}
+            <div className="w-8 h-12 -mt-3 rounded-b-full border-[5px] border-amber-400 bg-gradient-to-b from-transparent to-amber-900/40 shadow-2xl flex items-end justify-center pb-1">
+              <span className="w-2 h-2 rounded-full bg-amber-300" />
+            </div>
+          </div>
+
+          {/* Bottom Panel: Auspicious "शुभ" (Shubh) with Lotus Petal Frame */}
+          <div className="h-[28%] rounded-xl border border-amber-500/35 bg-[#25030B]/90 p-2 flex flex-col items-center justify-center relative shadow-inner">
+            <div className="w-12 h-12 rounded-full border border-amber-400/50 flex items-center justify-center bg-amber-500/10 shadow-[0_0_12px_rgba(212,175,55,0.3)]">
+              <span className="font-hindi text-xl sm:text-2xl text-amber-300 font-extrabold drop-shadow">
+                शुभ
+              </span>
+            </div>
+            <span className="text-[9px] font-serif uppercase tracking-widest text-amber-400/70 mt-1">
+              Auspicious
+            </span>
+          </div>
+
+          {/* Studded Brass Bolts on Left Door edge */}
+          <div className="absolute top-4 bottom-4 left-1.5 flex flex-col justify-between pointer-events-none">
+            {[...Array(6)].map((_, i) => (
+              <div key={i} className="w-2 h-2 rounded-full bg-gradient-to-tr from-amber-700 via-amber-300 to-yellow-100 border border-amber-900 shadow-[0_0_3px_#FFD700]" />
+            ))}
           </div>
         </div>
       </div>
@@ -150,77 +185,124 @@ export default function RoyalDoorOpening({ onOpened }) {
       {/* Right Palace Door */}
       <div
         ref={rightDoorRef}
-        className="w-1/2 h-full absolute right-0 top-0 z-10 [transform-origin:right_center] [transform-style:preserve-3d] shadow-[-15px_0_35px_rgba(0,0,0,0.8)] border-l border-amber-500/40 bg-gradient-to-bl from-[#2D060F] via-[#3E0513] to-[#1C0207] flex flex-col justify-between p-3 sm:p-6"
+        className="w-1/2 h-full absolute right-0 top-0 z-10 [transform-origin:right_center] [transform-style:preserve-3d] shadow-[-20px_0_40px_rgba(0,0,0,0.95)] border-l-2 border-[#D4AF37]/60 bg-gradient-to-bl from-[#200207] via-[#350611] to-[#160105] flex flex-col justify-between p-2.5 sm:p-4 overflow-hidden"
       >
-        {/* Intricate Carved Wood Paneling & Gold Studs */}
-        <div className="w-full h-full rounded-r-xl border-2 border-[#D4AF37]/50 p-2 sm:p-4 flex flex-col justify-between relative bg-[radial-gradient(#D4AF37_1px,transparent_1px)] [background-size:16px_16px]">
-          {/* Top Panel */}
-          <div className="h-1/3 rounded-lg border border-amber-500/30 bg-[#24030B]/80 p-2 flex items-center justify-center">
-            <svg viewBox="0 0 60 60" className="w-12 h-12 text-amber-400/60" fill="currentColor">
-              <circle cx="30" cy="30" r="24" fill="none" stroke="currentColor" strokeWidth="1" strokeDasharray="3 3" />
-              <circle cx="30" cy="30" r="16" fill="none" stroke="currentColor" strokeWidth="1.5" />
-              <path d="M30 14 L34 26 L46 30 L34 34 L30 46 L26 34 L14 30 L26 26 Z" />
+        {/* Subtle Silk Weave & Golden Star Fleck Pattern */}
+        <div className="absolute inset-0 pointer-events-none opacity-20 bg-[radial-gradient(#D4AF37_1px,transparent_1px)] [background-size:16px_16px]" />
+
+        {/* Outer Carved Palace Door Frame */}
+        <div className="relative w-full h-full rounded-r-2xl border-2 border-[#D4AF37]/50 p-2 sm:p-3 flex flex-col justify-between shadow-inner bg-black/20">
+          
+          {/* Top Panel: Sacred Golden Mandala & Filigree */}
+          <div className="h-[28%] rounded-xl border border-amber-500/35 bg-[#25030B]/90 p-2 flex flex-col items-center justify-center relative overflow-hidden shadow-inner">
+            <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#D4AF37_1px,transparent_1px)] [background-size:10px_10px]" />
+            <svg viewBox="0 0 80 80" className="w-14 h-14 text-amber-400/70 animate-spin-very-slow" fill="none">
+              <circle cx="40" cy="40" r="32" stroke="currentColor" strokeWidth="1" strokeDasharray="3 3" />
+              <circle cx="40" cy="40" r="22" stroke="currentColor" strokeWidth="1.5" />
+              <circle cx="40" cy="40" r="10" fill="#D4AF37" fillOpacity="0.3" stroke="currentColor" strokeWidth="1" />
+              <path d="M40 8 L44 32 L68 40 L44 48 L40 72 L36 48 L12 40 L36 32 Z" fill="currentColor" fillOpacity="0.4" />
+              <circle cx="40" cy="40" r="4" fill="#FFF3B0" />
             </svg>
-          </div>
-
-          {/* Right Brass Door Ring Handle */}
-          <div className="absolute left-3 top-1/2 -translate-y-1/2 flex flex-col items-center">
-            <div className="w-9 h-9 rounded-full bg-gradient-to-tr from-amber-700 via-amber-400 to-yellow-200 border-2 border-amber-900 shadow-xl flex items-center justify-center">
-              <div className="w-4 h-4 rounded-full bg-[#3E0513] border border-amber-400" />
-            </div>
-            {/* Hanging Ring */}
-            <div className="w-6 h-9 -mt-2 rounded-b-full border-4 border-amber-400 shadow-md" />
-          </div>
-
-          {/* Bottom Panel */}
-          <div className="h-1/3 rounded-lg border border-amber-500/30 bg-[#24030B]/80 p-2 flex items-center justify-center">
-            <span className="font-hindi text-lg sm:text-xl text-amber-400/70 font-bold">
-              लाभ
+            <span className="text-[9px] font-serif uppercase tracking-[0.25em] text-amber-300/80 mt-1">
+              कल्याणम
             </span>
+          </div>
+
+          {/* Right Door Handle: Matching Heavy Royal Brass Ring Knocker */}
+          <div className="absolute left-2 sm:left-3 top-1/2 -translate-y-1/2 flex flex-col items-center z-20">
+            {/* Ornate Brass Backplate */}
+            <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-gradient-to-tr from-amber-800 via-amber-400 to-yellow-100 border-2 border-amber-950 shadow-[0_0_15px_rgba(212,175,55,0.7)] flex items-center justify-center">
+              <div className="w-5 h-5 rounded-full bg-[#32040E] border-2 border-amber-300 flex items-center justify-center">
+                <span className="w-2 h-2 rounded-full bg-amber-400 shadow-[0_0_6px_#FFD700]" />
+              </div>
+            </div>
+            {/* Hanging Heavy Ring */}
+            <div className="w-8 h-12 -mt-3 rounded-b-full border-[5px] border-amber-400 bg-gradient-to-b from-transparent to-amber-900/40 shadow-2xl flex items-end justify-center pb-1">
+              <span className="w-2 h-2 rounded-full bg-amber-300" />
+            </div>
+          </div>
+
+          {/* Bottom Panel: Auspicious "लाभ" (Labh) with Lotus Petal Frame */}
+          <div className="h-[28%] rounded-xl border border-amber-500/35 bg-[#25030B]/90 p-2 flex flex-col items-center justify-center relative shadow-inner">
+            <div className="w-12 h-12 rounded-full border border-amber-400/50 flex items-center justify-center bg-amber-500/10 shadow-[0_0_12px_rgba(212,175,55,0.3)]">
+              <span className="font-hindi text-xl sm:text-2xl text-amber-300 font-extrabold drop-shadow">
+                लाभ
+              </span>
+            </div>
+            <span className="text-[9px] font-serif uppercase tracking-widest text-amber-400/70 mt-1">
+              Prosperity
+            </span>
+          </div>
+
+          {/* Studded Brass Bolts on Right Door edge */}
+          <div className="absolute top-4 bottom-4 right-1.5 flex flex-col justify-between pointer-events-none">
+            {[...Array(6)].map((_, i) => (
+              <div key={i} className="w-2 h-2 rounded-full bg-gradient-to-tr from-amber-700 via-amber-300 to-yellow-100 border border-amber-900 shadow-[0_0_3px_#FFD700]" />
+            ))}
           </div>
         </div>
       </div>
 
-      {/* Central Royal Medallion & "OPEN INVITATION" Button */}
+      {/* Central Royal Medallion & "OPEN INVITATION" Entrance Crest */}
       <div
         ref={sealRef}
-        className="relative z-30 flex flex-col items-center text-center p-4 max-w-[280px] sm:max-w-xs"
+        className="relative z-30 flex flex-col items-center text-center p-3 max-w-[310px] sm:max-w-xs"
       >
-        {/* Ornate Gold Medallion */}
-        <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-full p-1 bg-gradient-to-tr from-amber-600 via-amber-300 to-yellow-100 shadow-[0_0_35px_rgba(212,175,55,0.6)] flex items-center justify-center">
-          <div className="w-full h-full rounded-full bg-[#32040E] border-2 border-amber-400/80 flex flex-col items-center justify-center p-2 text-amber-200">
-            {/* Sacred Ganesha Emblem */}
-            <span className="text-xl sm:text-2xl drop-shadow">🕉️</span>
-            <span className="font-hindi text-xs sm:text-sm font-extrabold text-amber-300 tracking-wider mt-0.5">
-              शुभ विवाह
-            </span>
-            <span className="text-[10px] font-serif text-amber-100/90 tracking-widest uppercase mt-0.5">
-              Royal Invitation
-            </span>
+        {/* Celestial Rotating Golden Sunburst Halo */}
+        <div className="relative flex items-center justify-center">
+          <div className="absolute -inset-4 rounded-full border border-dashed border-amber-400/40 animate-celestial-spin pointer-events-none" />
+          <div className="absolute -inset-8 rounded-full bg-gradient-to-r from-amber-500/20 via-yellow-400/30 to-amber-500/20 blur-xl animate-pulse" />
+
+          {/* Ornate Gold Royal Medallion */}
+          <div className="relative w-32 h-32 sm:w-36 sm:h-36 rounded-full p-1.5 bg-gradient-to-tr from-amber-700 via-yellow-300 to-amber-600 shadow-[0_0_40px_rgba(212,175,55,0.7)] flex items-center justify-center">
+            {/* Scalloped Gold Rope Border */}
+            <div className="w-full h-full rounded-full bg-gradient-to-b from-[#380410] to-[#200207] border-2 border-amber-300/90 flex flex-col items-center justify-center p-2 shadow-inner relative overflow-hidden">
+              
+              {/* Sacred Ganesha Artwork */}
+              <div className="transform scale-75 -my-2 drop-shadow-[0_2px_8px_rgba(255,215,0,0.4)]">
+                <SacredGaneshaIllustration className="w-20 h-20" />
+              </div>
+
+              {/* Shubh Vivah Calligraphy */}
+              <span className="font-hindi text-xs sm:text-sm font-extrabold text-amber-200 tracking-wider drop-shadow -mt-1">
+                शुभ विवाह
+              </span>
+              <span className="text-[9px] font-serif text-amber-300/90 tracking-[0.2em] uppercase font-semibold">
+                Royal Invitation
+              </span>
+            </div>
           </div>
         </div>
 
-        {/* Couple Title on Medallion */}
-        <div className="mt-3 mb-4 bg-black/50 backdrop-blur-md px-4 py-1.5 rounded-full border border-amber-400/40">
-          <p className="font-serif text-xs sm:text-sm font-bold text-amber-200 tracking-wide">
-            Tanish Raj <span className="text-amber-400">&amp;</span> Prachi Arya
+        {/* Couple Names Golden Plaque */}
+        <div className="mt-3.5 mb-3 bg-[#1F0208]/85 backdrop-blur-md px-5 py-2 rounded-full border border-amber-400/60 shadow-[0_4px_15px_rgba(0,0,0,0.7)] flex items-center gap-2">
+          <Sparkles className="w-3.5 h-3.5 text-amber-400 animate-pulse" />
+          <p className="font-serif text-xs sm:text-sm font-bold text-amber-100 tracking-wide">
+            Tanish Raj <span className="font-script text-amber-400 text-base">&amp;</span> Prachi Arya
           </p>
+          <Sparkles className="w-3.5 h-3.5 text-amber-400 animate-pulse" />
         </div>
 
-        {/* Grand "OPEN INVITATION" Action Button */}
+        {/* Grand "OPEN INVITATION" Royal Button */}
         <button
           onClick={handleOpenDoors}
-          className="group relative px-6 sm:px-8 py-3 rounded-full bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-600 text-[#3E0513] font-serif text-xs sm:text-sm uppercase font-extrabold tracking-[0.2em] shadow-[0_4px_25px_rgba(212,175,55,0.7)] hover:shadow-[0_6px_35px_rgba(212,175,55,0.9)] transform hover:scale-105 active:scale-95 transition-all duration-300 border-2 border-white/80 animate-pulse"
+          className="group relative overflow-hidden px-7 sm:px-9 py-3 rounded-full bg-gradient-to-r from-amber-500 via-yellow-300 to-amber-500 text-[#2E030C] font-serif text-xs sm:text-sm uppercase font-extrabold tracking-[0.22em] shadow-[0_4px_30px_rgba(212,175,55,0.8)] hover:shadow-[0_6px_40px_rgba(212,175,55,1)] transform hover:scale-105 active:scale-95 transition-all duration-300 border-2 border-white/90"
         >
-          <span className="flex items-center gap-2">
-            <span>🪔</span>
+          {/* Shimmer Light Sweep Effect */}
+          <span className="absolute inset-0 w-1/2 h-full bg-gradient-to-r from-transparent via-white/70 to-transparent pointer-events-none animate-royal-shimmer" />
+
+          <span className="relative z-10 flex items-center justify-center gap-2.5 drop-shadow-sm">
+            <DiyaIllustration className="w-4 h-4" />
             <span>OPEN INVITATION</span>
-            <span>🪔</span>
+            <DiyaIllustration className="w-4 h-4 transform -scale-x-100" />
           </span>
         </button>
 
-        <p className="font-hindi text-[11px] text-amber-300/80 mt-2 font-medium tracking-wide">
-          (दरवाज़ा खोलने के लिए क्लिक करें)
+        {/* Touch / Click Invitation Prompt */}
+        <p className="font-hindi text-xs text-amber-200/90 mt-2.5 font-medium tracking-wide drop-shadow flex items-center justify-center gap-1.5 animate-pulse">
+          <span>✨</span>
+          <span>(दरवाज़ा खोलने के लिए यहाँ स्पर्श करें)</span>
+          <span>✨</span>
         </p>
       </div>
     </div>

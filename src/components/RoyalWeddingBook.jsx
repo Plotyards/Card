@@ -163,9 +163,20 @@ export default function RoyalWeddingBook() {
     }
   }, [currentPage]);
 
+  const [autoSlideTimerKey, setAutoSlideTimerKey] = useState(0);
+
+  // Helper to reset the 10-second timer whenever user manually interacts
+  const resetAutoSlideTimer = useCallback(() => {
+    setAutoSlideTimerKey((prev) => prev + 1);
+  }, []);
+
   const handleNext = useCallback(() => {
-    if (currentPage < PAGES.length - 1 && !isFlippingRef.current) {
+    if (isFlippingRef.current) return;
+    if (currentPage < PAGES.length - 1) {
       turnToPage(currentPage + 1, 'next');
+    } else {
+      // Loop back to the first page when reaching the end
+      turnToPage(0, 'next');
     }
   }, [currentPage, turnToPage]);
 
@@ -174,6 +185,17 @@ export default function RoyalWeddingBook() {
       turnToPage(currentPage - 1, 'prev');
     }
   }, [currentPage, turnToPage]);
+
+  // 10-Second Auto-Slide Timer: advances slide if no manual scroll/interaction for 10 seconds
+  useEffect(() => {
+    if (!hasDoorOpened) return;
+
+    const timer = setTimeout(() => {
+      handleNext();
+    }, 10000);
+
+    return () => clearTimeout(timer);
+  }, [hasDoorOpened, currentPage, autoSlideTimerKey, handleNext]);
 
   // Instant wheel scroll response in ANY direction (zero delay!)
   useEffect(() => {
@@ -184,6 +206,7 @@ export default function RoyalWeddingBook() {
 
     const onWheel = (e) => {
       e.preventDefault();
+      resetAutoSlideTimer();
       if (isFlippingRef.current || wheelCooldown) return;
 
       const isHorizontal = Math.abs(e.deltaX) > Math.abs(e.deltaY);
@@ -205,7 +228,7 @@ export default function RoyalWeddingBook() {
 
     stage.addEventListener('wheel', onWheel, { passive: false });
     return () => stage.removeEventListener('wheel', onWheel);
-  }, [handleNext, handlePrev]);
+  }, [handleNext, handlePrev, resetAutoSlideTimer]);
 
   // Instant Touch Swipe in ANY direction (Up/Down AND Left/Right)
   useEffect(() => {
@@ -216,11 +239,13 @@ export default function RoyalWeddingBook() {
     let touchStartY = 0;
 
     const onTouchStart = (e) => {
+      resetAutoSlideTimer();
       touchStartX = e.touches[0].clientX;
       touchStartY = e.touches[0].clientY;
     };
 
     const onTouchEnd = (e) => {
+      resetAutoSlideTimer();
       if (isFlippingRef.current) return;
       const diffX = touchStartX - e.changedTouches[0].clientX;
       const diffY = touchStartY - e.changedTouches[0].clientY;
@@ -245,10 +270,11 @@ export default function RoyalWeddingBook() {
       stage.removeEventListener('touchstart', onTouchStart);
       stage.removeEventListener('touchend', onTouchEnd);
     };
-  }, [handleNext, handlePrev]);
+  }, [handleNext, handlePrev, resetAutoSlideTimer]);
 
   // Tap-to-turn (Right side turns next, left side turns prev)
   const handleStageClick = (e) => {
+    resetAutoSlideTimer();
     if (e.target.closest('button') || e.target.closest('a')) return;
     if (isFlippingRef.current) return;
 
@@ -267,15 +293,17 @@ export default function RoyalWeddingBook() {
     const onKeyDown = (e) => {
       if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') {
         e.preventDefault();
+        resetAutoSlideTimer();
         handleNext();
       } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
         e.preventDefault();
+        resetAutoSlideTimer();
         handlePrev();
       }
     };
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
-  }, [handleNext, handlePrev]);
+  }, [handleNext, handlePrev, resetAutoSlideTimer]);
 
   const toggleMusic = () => {
     if (isMusicPlaying) {
@@ -308,6 +336,16 @@ export default function RoyalWeddingBook() {
         {/* GSAP 3D Royal Palace Door Opening Screen */}
         {!hasDoorOpened && (
           <RoyalDoorOpening onOpened={() => setHasDoorOpened(true)} />
+        )}
+
+        {/* Top 10-Second Auto-Slide Timer Bar */}
+        {hasDoorOpened && (
+          <div className="absolute top-0 left-0 right-0 h-1 bg-black/40 z-40 pointer-events-none overflow-hidden">
+            <div
+              key={`timer-${currentPage}-${autoSlideTimerKey}`}
+              className="h-full bg-gradient-to-r from-amber-400 via-yellow-200 to-amber-500 animate-auto-slide-progress shadow-[0_0_8px_#FFD700]"
+            />
+          </div>
         )}
 
         {/* Book Left Spine Binding (Simulated Gold Thread Dori & Velvet Spine) */}
@@ -361,8 +399,13 @@ export default function RoyalWeddingBook() {
 
         {/* Subtle Page Counter (Bottom-Left) */}
         <div className="absolute bottom-2.5 left-6 z-40 pointer-events-none">
-          <div className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-black/50 backdrop-blur-sm border border-amber-400/30 text-amber-200/90 text-[10px] font-serif shadow-sm">
+          <div className="flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-sm border border-amber-400/35 text-amber-200/90 text-[10px] font-serif shadow-sm">
             <span className="font-hindi text-amber-300">पृष्ठ {String(currentPage + 1).padStart(2, '0')} / {String(PAGES.length).padStart(2, '0')}</span>
+            <span className="text-amber-400/50">•</span>
+            <span className="text-[9px] text-amber-300/85 uppercase tracking-wider flex items-center gap-1">
+              <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
+              Auto 10s
+            </span>
           </div>
         </div>
 
