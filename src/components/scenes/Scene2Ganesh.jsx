@@ -52,7 +52,14 @@ export default function Scene2Ganesh() {
             </h2>
           </div>
 
-          <p className="font-serif text-xs text-stone-500 italic mt-3">
+          {/* Date & Location Pill */}
+          <div className="mt-3 pt-2 border-t border-amber-300/60 w-full flex items-center justify-center gap-2">
+            <span className="font-serif text-[11px] uppercase tracking-widest text-[#7A1326] font-bold">
+              04 December 2026 • Danapur, Patna
+            </span>
+          </div>
+
+          <p className="font-serif text-xs text-stone-500 italic mt-2">
             Together with their families
           </p>
         </MughalArchFrame>
