@@ -1,20 +1,15 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { flushSync } from 'react-dom';
 import gsap from 'gsap';
-import Scene1Opening from './scenes/Scene1Opening';
 import Scene2Ganesh from './scenes/Scene2Ganesh';
 import Scene3GroomFamily from './scenes/Scene3GroomFamily';
 import Scene4BrideFamily from './scenes/Scene4BrideFamily';
 import Scene5Roka from './scenes/Scene5Roka';
 import Scene6OverviewEvents from './scenes/Scene6OverviewEvents';
-import Scene7Haldi from './scenes/Scene7Haldi';
-import Scene8Mehndi from './scenes/Scene8Mehndi';
-import Scene9Sangeet from './scenes/Scene9Sangeet';
 import Scene10WeddingCeremony from './scenes/Scene10WeddingCeremony';
 import Scene11ShaadiPheras from './scenes/Scene11ShaadiPheras';
 import Scene12Venue from './scenes/Scene12Venue';
 import Scene13Countdown from './scenes/Scene13Countdown';
-import Scene14Blessing from './scenes/Scene14Blessing';
 import Scene15FinalInvite from './scenes/Scene15FinalInvite';
 import RoyalDoorOpening from './RoyalDoorOpening';
 import PetalShower from './PetalShower';
@@ -22,20 +17,15 @@ import { Volume2, VolumeX } from 'lucide-react';
 import { subscribeMusicState, startMusic, stopMusic } from '../utils/audioManager';
 
 const PAGES = [
-  { id: 'opening', title: 'Shubh Vivah', hindi: 'शुभ विवाह', component: Scene1Opening },
   { id: 'ganesh', title: 'Ganesh Blessings', hindi: 'श्री गणेशाय नमः', component: Scene2Ganesh },
   { id: 'groom-family', title: "Groom's Family", hindi: 'वर पक्ष', component: Scene3GroomFamily },
   { id: 'bride-family', title: "Bride's Family", hindi: 'वधू पक्ष', component: Scene4BrideFamily },
   { id: 'roka', title: 'Pooja & Matkor', hindi: 'पूजा एवं मटकोर', component: Scene5Roka },
   { id: 'events-overview', title: 'Celebrations', hindi: 'मांगलिक कार्यक्रम', component: Scene6OverviewEvents },
-  { id: 'haldi', title: 'Haldi Ceremony', hindi: 'हल्दी की रस्म', component: Scene7Haldi },
-  { id: 'mehndi', title: 'Mehndi Ceremony', hindi: 'मेहंदी की रात', component: Scene8Mehndi },
-  { id: 'sangeet', title: 'Sangeet Night', hindi: 'संगीत संध्या', component: Scene9Sangeet },
   { id: 'wedding', title: 'Wedding Ceremony', hindi: 'विवाह संस्कार', component: Scene10WeddingCeremony },
   { id: 'pheras', title: 'Shaadi / Pheras', hindi: 'सात फेरे', component: Scene11ShaadiPheras },
   { id: 'venue', title: 'Wedding Venue', hindi: 'शुभ स्थल', component: Scene12Venue },
   { id: 'countdown', title: 'The Big Day', hindi: 'शुभ मुहूर्त', component: Scene13Countdown },
-  { id: 'blessing', title: 'Final Blessing', hindi: 'मंगल आशीष', component: Scene14Blessing },
   { id: 'final', title: 'Cordially Invited', hindi: 'सादर आमंत्रण', component: Scene15FinalInvite },
 ];
 

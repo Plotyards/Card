@@ -1,18 +1,13 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import Scene1Opening from './scenes/Scene1Opening';
 import Scene2Ganesh from './scenes/Scene2Ganesh';
 import Scene3GroomFamily from './scenes/Scene3GroomFamily';
 import Scene4BrideFamily from './scenes/Scene4BrideFamily';
 import Scene5Roka from './scenes/Scene5Roka';
 import Scene6OverviewEvents from './scenes/Scene6OverviewEvents';
-import Scene7Haldi from './scenes/Scene7Haldi';
-import Scene8Mehndi from './scenes/Scene8Mehndi';
-import Scene9Sangeet from './scenes/Scene9Sangeet';
 import Scene10WeddingCeremony from './scenes/Scene10WeddingCeremony';
 import Scene11ShaadiPheras from './scenes/Scene11ShaadiPheras';
 import Scene12Venue from './scenes/Scene12Venue';
 import Scene13Countdown from './scenes/Scene13Countdown';
-import Scene14Blessing from './scenes/Scene14Blessing';
 import Scene15FinalInvite from './scenes/Scene15FinalInvite';
 import RoyalDoorOpening from './RoyalDoorOpening';
 import PetalShower from './PetalShower';
@@ -20,21 +15,16 @@ import { Volume2, VolumeX, ChevronDown } from 'lucide-react';
 import { subscribeMusicState, startMusic, stopMusic } from '../utils/audioManager';
 
 const SCENES = [
-  { id: 'opening', name: 'Shubh Vivah', component: Scene1Opening },
   { id: 'ganesh', name: 'Ganesh Blessings', component: Scene2Ganesh },
   { id: 'groom-family', name: 'वर पक्ष (Groom)', component: Scene3GroomFamily },
   { id: 'bride-family', name: 'वधू पक्ष (Bride)', component: Scene4BrideFamily },
   { id: 'roka', name: 'Pooja & Matkor', component: Scene5Roka },
   { id: 'events-overview', name: 'Celebrations', component: Scene6OverviewEvents },
-  { id: 'haldi', name: 'Haldi Ceremony', component: Scene7Haldi },
-  { id: 'mehndi', name: 'Mehndi Ceremony', component: Scene8Mehndi },
-  { id: 'sangeet', name: 'Sangeet Night', component: Scene9Sangeet },
   { id: 'wedding', name: 'Wedding Ceremony', component: Scene10WeddingCeremony },
   { id: 'pheras', name: 'Shaadi / Pheras', component: Scene11ShaadiPheras },
   { id: 'venue', name: 'Venue & Map', component: Scene12Venue },
   { id: 'countdown', name: 'The Big Day', component: Scene13Countdown },
-  { id: 'blessing', name: 'Final Blessing', component: Scene14Blessing },
-  { id: 'final', name: 'सादर आमंत्रण', component: Scene15FinalInvite },
+  { id: 'final', name: ' सादर आमंत्रण', component: Scene15FinalInvite },
 ];
 
 export default function InvitationPage() {
