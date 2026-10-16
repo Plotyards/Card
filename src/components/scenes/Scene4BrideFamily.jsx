@@ -51,7 +51,7 @@ export default function Scene4BrideFamily() {
               </p>
               <p className="font-script text-2xl text-amber-700 leading-none my-0.5">&amp;</p>
               <p className="font-bold text-[#3E0513] text-base sm:text-lg">
-                Mrs. Mamta Arya
+                Smt. Mamta Arya
               </p>
             </div>
 

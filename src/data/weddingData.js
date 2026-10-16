@@ -27,7 +27,7 @@ export const weddingData = {
       hindiRole: "वधू",
       familyTitle: "वधू पक्ष",
       familySubtitle: "BRIDE'S FAMILY",
-      parents: "D/o Shri Kamlesh Lal Arya & Mrs. Mamta Arya",
+      parents: "D/o Shri Kamlesh Lal Arya & Smt. Mamta Arya",
       residence: "Danapur – Patna",
       themeAccent: "burgundy",
       badgeText: "वधू पक्ष (Bride's Side)"

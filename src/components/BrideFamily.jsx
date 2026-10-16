@@ -86,7 +86,7 @@ export default function BrideFamily() {
               <p className="font-serif text-base sm:text-lg font-bold text-stone-900 mt-0.5 leading-snug">
                 D/o Shri Kamlesh Lal Arya
                 <br />
-                &amp; Mrs. Mamta Arya
+                &amp; Smt. Mamta Arya
               </p>
               <p className="font-hindi text-xs text-stone-600 mt-1">
                 सुपुत्री श्री कमलेश लाल आर्य एवं श्रीमती ममता आर्य
