@@ -66,7 +66,7 @@ export default function GroomFamily() {
           (तनिष राज)
         </span>
         <p className="font-serif text-xs sm:text-sm font-semibold text-wedding-maroon mt-1">
-          S/o Dr. Ramesh Kumar Lal
+          S/o Dr. Ramesh Kumar Lal and Smt. Archana Lal
         </p>
       </div>
 

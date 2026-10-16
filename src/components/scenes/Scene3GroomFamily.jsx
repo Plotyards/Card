@@ -38,7 +38,7 @@ export default function Scene3GroomFamily() {
               The Groom
             </p>
             <p className="font-serif text-xs sm:text-sm text-stone-200 mt-1 font-medium">
-              S/o <span className="text-amber-200 font-semibold">Dr. Ramesh Kumar Lal</span>
+              S/o <span className="text-amber-200 font-semibold">Dr. Ramesh Kumar Lal</span> and <span className="text-amber-200 font-semibold">Smt. Archana Lal</span>
             </p>
           </div>
 
