@@ -44,9 +44,12 @@ export default function Scene6OverviewEvents() {
           </div>
 
           {/* Date Badge */}
-          <div className="my-3 px-6 py-2 rounded-full bg-gradient-to-r from-amber-200 via-yellow-100 to-amber-200 border border-amber-400 shadow-sm">
-            <p className="font-serif text-sm sm:text-base font-extrabold text-[#3E0513] tracking-widest uppercase">
-              03 DECEMBER 2026
+          <div className="my-3 px-6 py-2 rounded-full bg-gradient-to-r from-amber-300/40 via-yellow-200/60 to-amber-300/40 border-2 border-amber-500 shadow-md">
+            <p className="font-serif text-base sm:text-lg font-black text-[#2B040C] tracking-widest uppercase text-center">
+              ✦ 03 DECEMBER 2026 ✦
+            </p>
+            <p className="font-serif text-xs font-bold text-amber-900 uppercase tracking-wider text-center">
+              Thursday • गुरुवार
             </p>
           </div>
 

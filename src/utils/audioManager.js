@@ -1,9 +1,12 @@
-// Global Audio Manager for Indian Wedding Ambient Shehnai & Sitar Music
+// Global Audio Manager for Indian Wedding Music
+// Features: Rich Shehnai & Tanpura Web Audio Synthesizer + Custom MP3 playback support
 
 let audioCtx = null;
 let isPlaying = false;
 let intervalId = null;
 let masterGain = null;
+let customAudio = null;
+let customAudioUrl = null;
 const listeners = new Set();
 
 const notifyListeners = () => {
@@ -18,24 +21,66 @@ export const subscribeMusicState = (callback) => {
 
 export const getIsMusicPlaying = () => isPlaying;
 
-// Traditional Indian Raga Yaman & Bilawal Swaras in C# (Sa Pa Sa)
+// Traditional Indian Raga Kalyan / Bilawal Wedding Swaras in C# (Sa Pa Sa)
 const baseFreq = 138.59; // C#3
 const notes = [
-  baseFreq,            // Sa (138.59 Hz)
-  baseFreq * 9 / 8,    // Re (155.91 Hz)
-  baseFreq * 5 / 4,    // Ga (173.24 Hz)
-  baseFreq * 45 / 32,  // Ma tivra (194.89 Hz)
-  baseFreq * 3 / 2,    // Pa (207.88 Hz)
-  baseFreq * 5 / 3,    // Dha (231.00 Hz)
-  baseFreq * 15 / 8,   // Ni (259.85 Hz)
-  baseFreq * 2,        // Taar Sa (277.18 Hz)
-  baseFreq * 9 / 4,    // Taar Re (311.83 Hz)
-  baseFreq * 5 / 2,    // Taar Ga (346.48 Hz)
+  baseFreq,            // 0: Sa (138.59 Hz)
+  baseFreq * 9 / 8,    // 1: Re (155.91 Hz)
+  baseFreq * 5 / 4,    // 2: Ga (173.24 Hz)
+  baseFreq * 4 / 3,    // 3: Shuddha Ma (184.79 Hz)
+  baseFreq * 45 / 32,  // 4: Ma tivra (194.89 Hz)
+  baseFreq * 3 / 2,    // 5: Pa (207.88 Hz)
+  baseFreq * 5 / 3,    // 6: Dha (231.00 Hz)
+  baseFreq * 15 / 8,   // 7: Ni (259.85 Hz)
+  baseFreq * 2,        // 8: Taar Sa (277.18 Hz)
+  baseFreq * 9 / 4,    // 9: Taar Re (311.83 Hz)
+  baseFreq * 5 / 2,    // 10: Taar Ga (346.48 Hz)
 ];
+
+// Auspicious Wedding Shehnai Dhun phrasing (Mangalam / Vivah Raag)
+const melody = [
+  0, 2, 5, 7, 8, 7, 5, 2, 4, 2, 1, 0,
+  5, 7, 8, 9, 8, 7, 5, 7, 8, 10, 8, 7,
+  5, 2, 0, 2, 5, 8, 7, 5, 2, 1, 0
+];
+
+export const setCustomAudioTrack = (urlOrFile) => {
+  if (customAudio) {
+    customAudio.pause();
+    customAudio = null;
+  }
+  if (typeof urlOrFile === 'string') {
+    customAudioUrl = urlOrFile;
+  } else if (urlOrFile instanceof File || urlOrFile instanceof Blob) {
+    customAudioUrl = URL.createObjectURL(urlOrFile);
+  }
+  if (isPlaying) {
+    stopMusic();
+    startMusic();
+  }
+};
 
 export const startMusic = async () => {
   if (isPlaying) return;
 
+  // 1. If custom MP3 track exists, play it
+  if (customAudioUrl) {
+    try {
+      if (!customAudio) {
+        customAudio = new Audio(customAudioUrl);
+        customAudio.loop = true;
+        customAudio.volume = 0.85;
+      }
+      await customAudio.play();
+      isPlaying = true;
+      notifyListeners();
+      return;
+    } catch (e) {
+      console.warn("Custom audio playback error, falling back to Shehnai synth:", e);
+    }
+  }
+
+  // 2. Rich Multi-Harmonic Shehnai & Tanpura Synthesizer
   try {
     const AudioContextClass = window.AudioContext || window.webkitAudioContext;
     if (!AudioContextClass) return;
@@ -51,38 +96,39 @@ export const startMusic = async () => {
     isPlaying = true;
     notifyListeners();
 
-    // Master Gain for pleasant volume
+    // Master Gain
     masterGain = audioCtx.createGain();
-    masterGain.gain.setValueAtTime(0.18, audioCtx.currentTime);
+    masterGain.gain.setValueAtTime(0.32, audioCtx.currentTime);
     masterGain.connect(audioCtx.destination);
 
-    // Warm Tanpura Drone (Sa - Pa - Sa harmonics)
+    // Warm Tanpura Drone (Sa - Pa - Sa chords with shimmering chorus)
     const dronePitches = [baseFreq, baseFreq * 1.5, baseFreq * 2];
-    dronePitches.forEach((freq) => {
+    dronePitches.forEach((freq, idx) => {
       const osc = audioCtx.createOscillator();
       const gain = audioCtx.createGain();
-      osc.type = 'triangle';
+      osc.type = idx === 1 ? 'sawtooth' : 'triangle';
       osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-      gain.gain.setValueAtTime(0.035, audioCtx.currentTime);
+      gain.gain.setValueAtTime(0.045, audioCtx.currentTime);
+
+      // Lowpass filter for smooth acoustic tanpura resonance
+      const filter = audioCtx.createBiquadFilter();
+      filter.type = 'lowpass';
+      filter.frequency.setValueAtTime(450 + idx * 100, audioCtx.currentTime);
 
       // Gentle continuous vibrato
       const lfo = audioCtx.createOscillator();
       const lfoGain = audioCtx.createGain();
-      lfo.frequency.setValueAtTime(3.2, audioCtx.currentTime);
-      lfoGain.gain.setValueAtTime(1.2, audioCtx.currentTime);
+      lfo.frequency.setValueAtTime(2.8 + idx * 0.4, audioCtx.currentTime);
+      lfoGain.gain.setValueAtTime(1.5, audioCtx.currentTime);
       lfo.connect(osc.frequency);
       lfo.start();
 
-      osc.connect(gain);
+      osc.connect(filter);
+      filter.connect(gain);
       gain.connect(masterGain);
       osc.start();
     });
 
-    // Traditional Shehnai melody sequence (Auspicious wedding raag phrasing)
-    const melody = [
-      0, 2, 4, 3, 4, 6, 7, 6, 4, 2, 1, 0,
-      4, 6, 7, 8, 7, 6, 4, 2, 0, 4, 7, 8
-    ];
     let noteIndex = 0;
 
     const playShehnaiNote = () => {
@@ -91,54 +137,86 @@ export const startMusic = async () => {
       const idx = melody[noteIndex % melody.length];
       const freq = notes[idx] || baseFreq;
 
-      const osc = audioCtx.createOscillator();
-      const oscGain = audioCtx.createGain();
+      // Authentic Shehnai Dual-Oscillator (Main Reed + Harmonic overtone)
+      const reedOsc = audioCtx.createOscillator();
+      const sawOsc = audioCtx.createOscillator();
+      const noteGain = audioCtx.createGain();
+      const reedFilter = audioCtx.createBiquadFilter();
 
-      // Rich Shehnai timbre (sine + gentle saw overtone)
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+      reedOsc.type = 'triangle';
+      sawOsc.type = 'sawtooth';
 
-      // Graceful Meend (glide) to next swara
+      reedOsc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+      sawOsc.frequency.setValueAtTime(freq * 2, audioCtx.currentTime);
+
+      // Shehnai acoustic filter
+      reedFilter.type = 'bandpass';
+      reedFilter.frequency.setValueAtTime(freq * 1.8, audioCtx.currentTime);
+      reedFilter.Q.setValueAtTime(2.2, audioCtx.currentTime);
+
+      // Meend (Graceful pitch glide to next swara)
       const nextIdx = melody[(noteIndex + 1) % melody.length];
       const nextFreq = notes[nextIdx] || freq;
-      osc.frequency.exponentialRampToValueAtTime(
-        nextFreq,
-        audioCtx.currentTime + 1.1
-      );
+      reedOsc.frequency.exponentialRampToValueAtTime(nextFreq, audioCtx.currentTime + 0.95);
+      sawOsc.frequency.exponentialRampToValueAtTime(nextFreq * 2, audioCtx.currentTime + 0.95);
 
-      // Envelope with soft attack and decay
-      oscGain.gain.setValueAtTime(0.001, audioCtx.currentTime);
-      oscGain.gain.linearRampToValueAtTime(0.075, audioCtx.currentTime + 0.25);
-      oscGain.gain.exponentialRampToValueAtTime(
-        0.001,
-        audioCtx.currentTime + 1.35
-      );
+      // Expressive Shehnai Envelope
+      noteGain.gain.setValueAtTime(0.001, audioCtx.currentTime);
+      noteGain.gain.linearRampToValueAtTime(0.14, audioCtx.currentTime + 0.18);
+      noteGain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 1.15);
 
-      osc.connect(oscGain);
-      oscGain.connect(masterGain);
+      reedOsc.connect(reedFilter);
+      sawOsc.connect(reedFilter);
+      reedFilter.connect(noteGain);
+      noteGain.connect(masterGain);
 
-      osc.start(audioCtx.currentTime);
-      osc.stop(audioCtx.currentTime + 1.4);
+      // Soft Temple Chime Bell every 4 notes
+      if (noteIndex % 4 === 0) {
+        try {
+          const bellOsc = audioCtx.createOscillator();
+          const bellGain = audioCtx.createGain();
+          bellOsc.type = 'sine';
+          bellOsc.frequency.setValueAtTime(1108.73, audioCtx.currentTime); // C#6
+          bellGain.gain.setValueAtTime(0.025, audioCtx.currentTime);
+          bellGain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 1.8);
+          bellOsc.connect(bellGain);
+          bellGain.connect(masterGain);
+          bellOsc.start();
+          bellOsc.stop(audioCtx.currentTime + 1.8);
+        } catch (e) {}
+      }
+
+      reedOsc.start(audioCtx.currentTime);
+      sawOsc.start(audioCtx.currentTime);
+      reedOsc.stop(audioCtx.currentTime + 1.2);
+      sawOsc.stop(audioCtx.currentTime + 1.2);
 
       noteIndex++;
-      intervalId = setTimeout(playShehnaiNote, 1150 + Math.random() * 300);
+      intervalId = setTimeout(playShehnaiNote, 950 + Math.random() * 200);
     };
 
     playShehnaiNote();
   } catch (err) {
-    console.warn("Autoplay audio error:", err);
+    console.warn("Wedding music audio error:", err);
   }
 };
 
 export const stopMusic = () => {
   isPlaying = false;
   notifyListeners();
+  if (customAudio) {
+    try {
+      customAudio.pause();
+    } catch (e) {}
+  }
   if (intervalId) {
     clearTimeout(intervalId);
     intervalId = null;
   }
   if (audioCtx && audioCtx.state === 'running') {
-    audioCtx.suspend();
+    try {
+      audioCtx.suspend();
+    } catch (e) {}
   }
 };
 
@@ -148,9 +226,4 @@ export const toggleMusic = () => {
   } else {
     startMusic();
   }
-};
-
-// Autoplay is strictly disabled as requested. Music starts only when user clicks the music button.
-export const initAutoplayListeners = () => {
-  // No-op to respect user prompt: "Do NOT autoplay sound. Music starts only after user clicks the button."
 };

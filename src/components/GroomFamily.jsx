@@ -81,13 +81,13 @@ export default function GroomFamily() {
             </div>
             <div>
               <span className="text-[11px] uppercase tracking-wider font-bold text-wedding-maroon block">
-                Grandfather / Lineage
+                Grandparents / Lineage • दादा जी एवं दादी जी
               </span>
-              <p className="font-serif text-base sm:text-lg font-bold text-stone-900 mt-0.5">
-                Grandson of Late Shri Surender Lal Das
+              <p className="font-serif text-base sm:text-lg font-extrabold text-stone-900 mt-0.5">
+                Grandson of Late Shri Surender Lal Das &amp; Late Smt. Lal Devi
               </p>
-              <p className="font-hindi text-xs text-stone-600">
-                स्व० सुरेन्द्र लाल दास जी के पौत्र
+              <p className="font-hindi text-xs text-stone-600 font-medium">
+                स्व० सुरेन्द्र लाल दास जी एवं स्व० श्रीमती लाल देवी जी के पौत्र
               </p>
             </div>
           </div>
@@ -120,14 +120,14 @@ export default function GroomFamily() {
               <Heart className="w-4 h-4" />
             </div>
             <div>
-              <span className="text-[11px] uppercase tracking-wider font-bold text-wedding-maroon block">
-                Maternal Grandparents (नाना - नानी)
+              <span className="text-[11px] uppercase tracking-wider font-extrabold text-wedding-maroon block">
+                Maternal Grandparents (पूज्य नाना - नानी)
               </span>
-              <div className="font-serif text-sm sm:text-base font-semibold text-stone-900 mt-1 space-y-0.5">
-                <p>Nana – <span className="font-bold">Shri Ramautar Lal</span></p>
-                <p>Nani – <span className="font-bold">Smt. Vibha Devi</span></p>
+              <div className="font-serif text-sm sm:text-base text-stone-900 mt-1 space-y-1">
+                <p>Nana – <span className="font-black text-stone-950 text-base">Shri Ramautar Lal</span></p>
+                <p>Nani – <span className="font-black text-stone-950 text-base">Smt. Vibha Devi</span></p>
               </div>
-              <p className="font-hindi text-xs text-stone-600 mt-1">
+              <p className="font-hindi text-xs text-stone-700 font-bold mt-1">
                 नाना – श्री रामावतार लाल | नानी – श्रीमती विभा देवी
               </p>
             </div>

@@ -9,12 +9,12 @@ import Scene6OverviewEvents from './scenes/Scene6OverviewEvents';
 import Scene10WeddingCeremony from './scenes/Scene10WeddingCeremony';
 import Scene11ShaadiPheras from './scenes/Scene11ShaadiPheras';
 import Scene12Venue from './scenes/Scene12Venue';
-import Scene13Countdown from './scenes/Scene13Countdown';
 import Scene15FinalInvite from './scenes/Scene15FinalInvite';
 import RoyalDoorOpening from './RoyalDoorOpening';
 import PetalShower from './PetalShower';
-import { Volume2, VolumeX } from 'lucide-react';
+import { Volume2, VolumeX, Video } from 'lucide-react';
 import { subscribeMusicState, startMusic, stopMusic } from '../utils/audioManager';
+import VideoExportModal from './VideoExportModal';
 
 const PAGES = [
   { id: 'ganesh', title: 'Ganesh Blessings', hindi: 'श्री गणेशाय नमः', component: Scene2Ganesh },
@@ -25,7 +25,6 @@ const PAGES = [
   { id: 'wedding', title: 'Wedding Ceremony', hindi: 'विवाह संस्कार', component: Scene10WeddingCeremony },
   { id: 'pheras', title: 'Shaadi / Pheras', hindi: 'सात फेरे', component: Scene11ShaadiPheras },
   { id: 'venue', title: 'Wedding Venue', hindi: 'शुभ स्थल', component: Scene12Venue },
-  { id: 'countdown', title: 'The Big Day', hindi: 'शुभ मुहूर्त', component: Scene13Countdown },
   { id: 'final', title: 'Cordially Invited', hindi: 'सादर आमंत्रण', component: Scene15FinalInvite },
 ];
 
@@ -34,6 +33,7 @@ export default function RoyalWeddingBook() {
   const [targetPage, setTargetPage] = useState(1);
   const [isMusicPlaying, setIsMusicPlaying] = useState(false);
   const [hasDoorOpened, setHasDoorOpened] = useState(false);
+  const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
   const isFlippingRef = useRef(false);
 
   const bookStageRef = useRef(null);
@@ -185,6 +185,26 @@ export default function RoyalWeddingBook() {
       turnToPage(currentPage - 1, 'prev');
     }
   }, [currentPage, turnToPage]);
+
+  // Auto-play through all slides for smooth video recording
+  const handleStartAutoPresentation = useCallback((onComplete) => {
+    startMusic();
+    turnToPage(0, 'next');
+
+    let pageIdx = 0;
+    const interval = setInterval(() => {
+      pageIdx++;
+      if (pageIdx < PAGES.length) {
+        turnToPage(pageIdx, 'next');
+      } else {
+        clearInterval(interval);
+        setTimeout(() => {
+          if (onComplete) onComplete();
+          setIsVideoModalOpen(true);
+        }, 3200);
+      }
+    }, 3800);
+  }, [turnToPage]);
 
   // 10-Second Auto-Slide Timer: advances slide if no manual scroll/interaction for 10 seconds
   useEffect(() => {
@@ -397,6 +417,20 @@ export default function RoyalWeddingBook() {
           )}
         </button>
 
+        {/* Floating WhatsApp Video Export Button (Bottom-Right, left of music) */}
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            setIsVideoModalOpen(true);
+          }}
+          className="absolute bottom-3 right-15 z-40 h-10 px-3 rounded-full flex items-center gap-1.5 shadow-[0_4px_20px_rgba(0,0,0,0.7)] border border-amber-400/70 bg-gradient-to-r from-[#3E0513] to-[#1A0105] text-amber-200 hover:text-white hover:border-amber-300 transition-all text-xs font-serif font-bold group"
+          title="Export / Download WhatsApp Video"
+          aria-label="Export Video"
+        >
+          <Video className="w-4 h-4 text-amber-400 group-hover:scale-110 transition-transform" />
+          <span className="font-hindi text-xs text-amber-300">वीडियो</span>
+        </button>
+
         {/* Subtle Page Counter (Bottom-Left) */}
         <div className="absolute bottom-2.5 left-6 z-40 pointer-events-none">
           <div className="flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-black/60 backdrop-blur-sm border border-amber-400/35 text-amber-200/90 text-[10px] font-serif shadow-sm">
@@ -417,6 +451,14 @@ export default function RoyalWeddingBook() {
           />
         </div>
       </div>
+
+      {/* WhatsApp Video Export Modal */}
+      <VideoExportModal
+        isOpen={isVideoModalOpen}
+        onClose={() => setIsVideoModalOpen(false)}
+        onStartAutoPresentation={handleStartAutoPresentation}
+        totalPages={PAGES.length}
+      />
     </div>
   );
 }

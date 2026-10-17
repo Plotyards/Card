@@ -39,9 +39,12 @@ export default function Scene8Mehndi() {
           </div>
 
           {/* Date Stamp */}
-          <div className="my-3 px-6 py-2 rounded-full bg-emerald-100 border-2 border-emerald-600/50 shadow-sm">
-            <p className="font-serif text-sm sm:text-base font-extrabold text-[#081C15] tracking-widest uppercase">
-              03 DECEMBER 2026
+          <div className="my-3 px-6 py-2 rounded-full bg-gradient-to-r from-emerald-100 via-emerald-50 to-emerald-100 border-2 border-emerald-700 shadow-md">
+            <p className="font-serif text-base sm:text-lg font-black text-[#081C15] tracking-widest uppercase text-center">
+              ✦ 03 DECEMBER 2026 ✦
+            </p>
+            <p className="font-serif text-xs font-bold text-emerald-900 uppercase tracking-wider text-center">
+              Thursday • गुरुवार
             </p>
           </div>
 

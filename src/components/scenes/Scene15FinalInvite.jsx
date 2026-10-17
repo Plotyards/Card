@@ -70,14 +70,14 @@ export default function Scene15FinalInvite() {
           </div>
 
           {/* RSVP / Cordially Invited By Nana & Nani */}
-          <div className="my-2 p-2 sm:p-2.5 rounded-xl bg-amber-50/90 border border-amber-300/80 shadow-sm w-full max-w-[290px]">
-            <p className="font-serif text-[10px] uppercase tracking-[0.2em] text-[#7A1326] font-bold">
-              RSVP • निमंत्रक
+          <div className="my-2.5 p-2.5 sm:p-3 rounded-2xl bg-gradient-to-b from-amber-50 to-amber-100/90 border-2 border-amber-400 shadow-md w-full max-w-[310px] text-center">
+            <p className="font-serif text-[11px] uppercase tracking-[0.25em] text-[#7A1326] font-extrabold">
+              ✦ RSVP • निमंत्रक ✦
             </p>
-            <p className="font-serif font-bold text-xs sm:text-sm text-[#3E0513] mt-0.5">
+            <p className="font-serif font-black text-sm sm:text-base text-[#3E0513] mt-1 tracking-wide">
               Shri Ramautar Lal &amp; Smt. Vibha Devi
             </p>
-            <p className="font-hindi text-[11px] text-amber-900/80 font-medium">
+            <p className="font-hindi text-xs sm:text-sm text-amber-950 font-extrabold mt-0.5">
               (पूज्य नाना जी एवं नानी जी)
             </p>
           </div>

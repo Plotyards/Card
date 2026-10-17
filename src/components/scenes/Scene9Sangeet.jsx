@@ -39,9 +39,12 @@ export default function Scene9Sangeet() {
           </div>
 
           {/* Date Stamp */}
-          <div className="my-3 px-6 py-2 rounded-full bg-rose-900/60 border-2 border-amber-400 shadow-sm">
-            <p className="font-serif text-sm sm:text-base font-extrabold text-amber-200 tracking-widest uppercase">
-              03 DECEMBER 2026
+          <div className="my-3 px-6 py-2 rounded-full bg-gradient-to-r from-rose-950 via-rose-900 to-rose-950 border-2 border-amber-400 shadow-md">
+            <p className="font-serif text-base sm:text-lg font-black text-amber-200 tracking-widest uppercase text-center">
+              ✦ 03 DECEMBER 2026 ✦
+            </p>
+            <p className="font-serif text-xs font-bold text-amber-300 uppercase tracking-wider text-center">
+              Thursday • गुरुवार
             </p>
           </div>
 

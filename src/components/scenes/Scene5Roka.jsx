@@ -43,16 +43,19 @@ export default function Scene5Roka() {
           </div>
 
           {/* Date Stamp with Ornate Gold Frame Border */}
-          <div className="my-3 px-5 py-2 rounded-full bg-gradient-to-r from-amber-500/20 via-yellow-400/30 to-amber-500/20 border-2 border-amber-500/60 shadow-sm">
-            <p className="font-serif text-sm sm:text-base font-extrabold text-[#3E0513] tracking-widest uppercase">
-              02 DECEMBER 2026
+          <div className="my-3 px-6 py-2 rounded-full bg-gradient-to-r from-amber-400/30 via-yellow-300/50 to-amber-400/30 border-2 border-amber-600/80 shadow-md">
+            <p className="font-serif text-base sm:text-lg font-black text-[#2B040C] tracking-widest uppercase">
+              ✦ 02 DECEMBER 2026 ✦
+            </p>
+            <p className="font-serif text-xs font-bold text-amber-900 uppercase tracking-wider text-center">
+              Wednesday • बुधवार
             </p>
           </div>
 
           {/* Traditional Havan Fire motif */}
           <div className="mt-2 flex flex-col items-center">
             <SacredHavanKund className="w-16 h-16" />
-            <p className="font-hindi text-xs text-amber-900 mt-1 font-medium">
+            <p className="font-hindi text-xs text-amber-900 mt-1 font-bold">
               पवित्र शगुन एवं मांगलिक विधान
             </p>
           </div>
@@ -62,7 +65,7 @@ export default function Scene5Roka() {
       {/* Bottom Floating Diyas & Flower decor */}
       <div className="relative z-20 flex items-center justify-between w-full max-w-sm px-6 pb-2">
         <DiyaIllustration className="w-8 h-8 drop-shadow" />
-        <span className="font-serif text-[11px] tracking-widest text-amber-900 uppercase">
+        <span className="font-serif text-xs font-extrabold tracking-widest text-amber-950 uppercase bg-amber-200/60 px-3 py-0.5 rounded-full border border-amber-400/50">
           02 • 12 • 2026
         </span>
         <DiyaIllustration className="w-8 h-8 transform -scale-x-100 drop-shadow" />

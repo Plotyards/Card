@@ -64,14 +64,14 @@ export default function RSVP() {
           <PaisleyDivider className="my-4" />
 
           {/* Cordially Invited By Nana & Nani */}
-          <div className="my-4 p-4 sm:p-5 rounded-2xl bg-wedding-ivory/80 border border-wedding-gold/40 shadow-sm max-w-md mx-auto">
-            <span className="text-[11px] uppercase tracking-widest text-wedding-gold-dark font-bold font-serif block">
+          <div className="my-4 p-4 sm:p-5 rounded-2xl bg-wedding-ivory/95 border-2 border-wedding-gold/60 shadow-md max-w-md mx-auto">
+            <span className="text-xs uppercase tracking-widest text-wedding-gold-dark font-extrabold font-serif block">
               RSVP • निमंत्रक / स्वागताकांक्षी
             </span>
-            <p className="font-serif text-lg sm:text-xl font-bold text-wedding-maroon-dark mt-1">
+            <p className="font-serif text-xl sm:text-2xl font-black text-wedding-maroon-dark mt-1 tracking-wide">
               Shri Ramautar Lal &amp; Smt. Vibha Devi
             </p>
-            <p className="font-hindi text-xs sm:text-sm text-stone-600">
+            <p className="font-hindi text-sm font-bold text-wedding-maroon mt-0.5">
               (पूज्य नाना जी एवं नानी जी • Samastipur)
             </p>
           </div>

@@ -37,9 +37,12 @@ export default function Scene10WeddingCeremony() {
           </div>
 
           {/* Date Badge */}
-          <div className="my-2 px-6 py-1.5 rounded-full bg-red-950/80 border-2 border-amber-400 shadow-inner">
-            <p className="font-serif text-sm sm:text-base font-extrabold text-amber-300 tracking-widest uppercase">
-              04 DECEMBER 2026
+          <div className="my-2 px-6 py-2 rounded-full bg-gradient-to-r from-red-950 via-[#4A0A17] to-red-950 border-2 border-amber-300 shadow-[0_0_15px_rgba(212,175,55,0.4)]">
+            <p className="font-serif text-base sm:text-lg font-black text-amber-200 tracking-widest uppercase text-center drop-shadow">
+              ✦ 04 DECEMBER 2026 ✦
+            </p>
+            <p className="font-serif text-xs font-bold text-amber-300 uppercase tracking-wider text-center">
+              Friday • शुक्रवार
             </p>
           </div>
 

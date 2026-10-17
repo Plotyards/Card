@@ -77,21 +77,21 @@ export default function RoyalDoorOpening({ onOpened }) {
 
     // Step A: Lord Ganesha sacred seal pulses and dissolves into divine golden light
     tl.to(sealRef.current, {
-      scale: 1.3,
+      scale: 1.25,
       opacity: 0,
-      duration: 0.6,
-      ease: 'back.in(2)',
+      duration: 0.22,
+      ease: 'power2.in',
     })
     // Step B: Brilliant warm sunlight bursts from behind the gates
     .to(
       lightGlowRef.current,
       {
         opacity: 1,
-        scale: 2.5,
-        duration: 0.8,
+        scale: 2.2,
+        duration: 0.32,
         ease: 'power2.out',
       },
-      '-=0.4'
+      '-=0.12'
     )
     // Step C: Massive 3D Royal Palace Gates swing wide open
     .to(
@@ -99,18 +99,18 @@ export default function RoyalDoorOpening({ onOpened }) {
       {
         rotateY: -115,
         opacity: 0.05,
-        duration: 1.6,
-        ease: 'power3.inOut',
+        duration: 0.58,
+        ease: 'power3.out',
       },
-      '-=0.5'
+      '-=0.15'
     )
     .to(
       rightDoorRef.current,
       {
         rotateY: 115,
         opacity: 0.05,
-        duration: 1.6,
-        ease: 'power3.inOut',
+        duration: 0.58,
+        ease: 'power3.out',
       },
       '<='
     )
@@ -119,11 +119,11 @@ export default function RoyalDoorOpening({ onOpened }) {
       archRef.current,
       {
         opacity: 0,
-        y: -40,
-        duration: 0.7,
+        y: -35,
+        duration: 0.28,
         ease: 'power2.in',
       },
-      '-=0.8'
+      '-=0.35'
     )
     // Step E: Container dissolves smoothly to reveal album slide
     .to(
@@ -131,18 +131,18 @@ export default function RoyalDoorOpening({ onOpened }) {
       {
         opacity: 0,
         pointerEvents: 'none',
-        duration: 0.45,
+        duration: 0.2,
         ease: 'power1.out',
       },
-      '-=0.2'
+      '-=0.1'
     );
   };
 
-  // Automatic Door Opening after 5 seconds if not tapped by user
+  // Automatic Fast Door Opening after 1.2 seconds if not tapped by user
   useEffect(() => {
     timerRef.current = setTimeout(() => {
       handleOpenDoors();
-    }, 5000);
+    }, 1200);
 
     return () => {
       if (timerRef.current) {
@@ -353,22 +353,22 @@ export default function RoyalDoorOpening({ onOpened }) {
             </div>
           </div>
 
-          {/* Clean, Elegant Floating Tap Prompt (No buttons) */}
+          {/* Fast Responsive Tap Prompt */}
           <div className="mt-8 flex flex-col items-center pointer-events-none">
-            <div className="px-5 py-2 rounded-full bg-black/65 backdrop-blur-md border border-amber-400/40 text-amber-200 text-xs sm:text-sm font-serif shadow-[0_4px_20px_rgba(0,0,0,0.8)] flex items-center gap-2 animate-pulse">
+            <div className="px-5 py-2 rounded-full bg-black/75 backdrop-blur-md border border-amber-400/60 text-amber-200 text-xs sm:text-sm font-serif shadow-[0_4px_25px_rgba(212,175,55,0.4)] flex items-center gap-2 animate-pulse">
               <span className="text-amber-400">✨</span>
-              <span>Tap anywhere to open</span>
+              <span className="font-semibold">Tap to Open</span>
               <span className="text-amber-400/60">•</span>
-              <span className="font-hindi text-amber-300">स्वतः 5 सेकंड में खुलेगा</span>
+              <span className="font-hindi text-amber-300 font-bold">कार्ड खोलें</span>
               <span className="text-amber-400">✨</span>
             </div>
 
-            {/* Subtle 5-Second Countdown Progress Bar */}
-            <div className="w-36 h-1 rounded-full bg-black/50 border border-amber-400/20 overflow-hidden mt-2">
+            {/* Quick 1.2s Progress Bar */}
+            <div className="w-36 h-1 rounded-full bg-black/50 border border-amber-400/30 overflow-hidden mt-2">
               <div
                 className="h-full bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-500 shadow-[0_0_6px_#FFD700]"
                 style={{
-                  animation: 'autoSlideProgress 5s linear forwards',
+                  animation: 'autoSlideProgress 1.2s linear forwards',
                 }}
               />
             </div>

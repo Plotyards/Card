@@ -39,9 +39,12 @@ export default function Scene7Haldi() {
           </div>
 
           {/* Date Badge */}
-          <div className="my-3 px-6 py-2 rounded-full bg-amber-400/25 border-2 border-amber-500/70 shadow-sm">
-            <p className="font-serif text-sm sm:text-base font-extrabold text-[#78350F] tracking-widest uppercase">
-              03 DECEMBER 2026
+          <div className="my-3 px-6 py-2 rounded-full bg-gradient-to-r from-amber-400/30 via-yellow-300/60 to-amber-400/30 border-2 border-amber-600 shadow-md">
+            <p className="font-serif text-base sm:text-lg font-black text-[#78350F] tracking-widest uppercase text-center">
+              ✦ 03 DECEMBER 2026 ✦
+            </p>
+            <p className="font-serif text-xs font-bold text-amber-900 uppercase tracking-wider text-center">
+              Thursday • गुरुवार
             </p>
           </div>
 

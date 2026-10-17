@@ -53,9 +53,12 @@ export default function Scene2Ganesh() {
           </div>
 
           {/* Date & Location Pill */}
-          <div className="mt-3 pt-2 border-t border-amber-300/60 w-full flex items-center justify-center gap-2">
-            <span className="font-serif text-[11px] uppercase tracking-widest text-[#7A1326] font-bold">
-              04 December 2026 • Danapur, Patna
+          <div className="mt-3 pt-2.5 border-t border-amber-300/80 w-full flex flex-col items-center justify-center gap-1">
+            <span className="inline-block px-4 py-1 rounded-full bg-amber-100/90 border border-amber-400 font-serif text-xs sm:text-sm uppercase tracking-widest text-[#7A1326] font-black shadow-sm">
+              ✦ 04 DECEMBER 2026 ✦
+            </span>
+            <span className="font-serif text-[11px] uppercase tracking-wider text-stone-700 font-bold">
+              Danapur, Patna
             </span>
           </div>
 

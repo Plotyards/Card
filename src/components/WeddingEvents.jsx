@@ -82,8 +82,8 @@ export default function WeddingEvents() {
                 >
                   <div className="relative">
                     {/* Date Badge */}
-                    <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-wedding-maroon text-wedding-gold font-display text-xs sm:text-sm font-bold tracking-wider mb-3 shadow-sm">
-                      <Calendar className="w-3.5 h-3.5" />
+                    <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-wedding-maroon text-wedding-gold font-serif text-xs sm:text-sm font-black tracking-widest mb-3 shadow-md border border-wedding-gold/60">
+                      <Calendar className="w-3.5 h-3.5 text-amber-300" />
                       <span>{event.date}</span>
                     </div>
 

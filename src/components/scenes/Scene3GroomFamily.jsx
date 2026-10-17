@@ -44,26 +44,35 @@ export default function Scene3GroomFamily() {
 
           {/* Lineage Details */}
           <div className="space-y-2.5 my-2 text-stone-200 text-xs sm:text-sm font-serif">
-            {/* Grandfather */}
-            <div className="p-2 rounded-lg bg-emerald-950/60 border border-amber-400/20">
-              <p className="text-amber-300/90 text-[11px] uppercase tracking-wider">Lineage</p>
-              <p className="font-semibold text-stone-100 text-sm sm:text-base">
-                Grandson of Late Shri Surender Lal Das
+            {/* Grandparents (Dada - Dadi) */}
+            <div className="p-2 sm:p-2.5 rounded-lg bg-emerald-950/70 border border-amber-400/30 text-center">
+              <p className="text-amber-300 font-serif font-bold text-[11px] uppercase tracking-wider">
+                Grandparents • पूज्य दादा जी एवं दादी जी
               </p>
-              <p className="text-emerald-300/80 text-xs">
+              <p className="font-bold text-stone-100 text-xs sm:text-sm mt-0.5">
+                Grandson of <span className="text-amber-200 font-extrabold">Late Shri Surender Lal Das</span>
+              </p>
+              <p className="font-bold text-stone-100 text-xs sm:text-sm">
+                &amp; <span className="text-amber-200 font-extrabold">Late Smt. Lal Devi</span>
+              </p>
+              <p className="text-emerald-300/90 text-[11px] mt-0.5 font-medium">
                 Kumarpatti, Darbhanga
               </p>
             </div>
 
             {/* Maternal Grandparents (Nana - Nani) */}
-            <div className="p-2 rounded-lg bg-emerald-950/60 border border-amber-400/20">
-              <p className="text-amber-300/90 text-[11px] uppercase tracking-wider">Maternal Blessings</p>
-              <p className="text-stone-100 font-medium">
-                Nana – <span className="font-semibold text-amber-200">Shri Ramautar Lal</span>
+            <div className="p-2 sm:p-2.5 rounded-lg bg-emerald-950/70 border border-amber-400/30 text-center">
+              <p className="text-amber-300 font-serif font-bold text-[11px] uppercase tracking-wider">
+                Maternal Blessings • पूज्य नाना जी एवं नानी जी
               </p>
-              <p className="text-stone-100 font-medium">
-                Nani – <span className="font-semibold text-amber-200">Smt. Vibha Devi</span>
-              </p>
+              <div className="mt-1 space-y-0.5">
+                <p className="text-stone-100 font-semibold text-xs sm:text-sm">
+                  Nana – <span className="font-black text-amber-200 text-sm sm:text-base tracking-wide">Shri Ramautar Lal</span>
+                </p>
+                <p className="text-stone-100 font-semibold text-xs sm:text-sm">
+                  Nani – <span className="font-black text-amber-200 text-sm sm:text-base tracking-wide">Smt. Vibha Devi</span>
+                </p>
+              </div>
             </div>
 
             {/* Residence */}

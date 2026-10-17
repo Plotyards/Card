@@ -48,17 +48,20 @@ export default function Scene11ShaadiPheras() {
 
           {/* Date & Departure Highlight Badges */}
           <div className="mt-3 space-y-2 w-full px-2">
-            <div className="py-1.5 px-4 rounded-full bg-red-950/90 border border-amber-400/80 shadow-inner flex items-center justify-center">
-              <p className="font-serif text-xs sm:text-sm font-extrabold text-amber-300 tracking-widest uppercase">
-                04 DECEMBER 2026
+            <div className="py-2 px-4 rounded-full bg-gradient-to-r from-red-950 via-[#4A0A17] to-red-950 border-2 border-amber-300 shadow-[0_0_12px_rgba(212,175,55,0.4)] flex flex-col items-center justify-center">
+              <p className="font-serif text-sm sm:text-base font-black text-amber-200 tracking-widest uppercase">
+                ✦ 04 DECEMBER 2026 ✦
+              </p>
+              <p className="font-serif text-xs font-bold text-amber-300 uppercase tracking-wider">
+                Friday • शुक्रवार
               </p>
             </div>
 
             {/* Departure Highlight */}
-            <div className="py-1.5 px-4 rounded-full bg-amber-500/20 border border-amber-400/60 flex items-center justify-center gap-2">
-              <span className="text-xs text-amber-300">⏰</span>
-              <p className="font-serif text-xs sm:text-sm font-bold text-amber-200 tracking-wider">
-                Departure – 3:00 PM
+            <div className="py-1.5 px-4 rounded-full bg-amber-500/25 border-2 border-amber-400 flex items-center justify-center gap-2 shadow-sm">
+              <span className="text-sm text-amber-300">⏰</span>
+              <p className="font-serif text-xs sm:text-sm font-black text-amber-100 tracking-wider">
+                Departure – 3:00 PM (विदाई समय)
               </p>
             </div>
           </div>
